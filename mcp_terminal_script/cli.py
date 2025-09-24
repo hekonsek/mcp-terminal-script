@@ -1,6 +1,6 @@
 """Command line interface for the mcp-terminal-script package."""
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 import subprocess
 
@@ -39,6 +39,44 @@ def record() -> None:
         raise typer.Exit(code=127)
 
     raise typer.Exit(code=result.returncode)
+
+
+@app.command()
+def clean() -> None:
+    """Remove script logs that haven't been touched in the last 15 minutes."""
+    cache_dir = Path.home() / ".cache" / "script"
+    if not cache_dir.exists():
+        typer.echo("No script logs directory found.")
+        return
+
+    cutoff = datetime.now() - timedelta(minutes=15)
+    removed = 0
+
+    for entry in cache_dir.iterdir():
+        if not entry.is_file():
+            continue
+
+        try:
+            last_modified = datetime.fromtimestamp(entry.stat().st_mtime)
+        except OSError as exc:
+            typer.secho(f"Skipping {entry.name}: {exc}", fg="yellow", err=True)
+            continue
+
+        if last_modified >= cutoff:
+            continue
+
+        try:
+            entry.unlink()
+            removed += 1
+        except FileNotFoundError:
+            continue
+        except OSError as exc:
+            typer.secho(f"Failed to remove {entry.name}: {exc}", fg="red", err=True)
+
+    if removed:
+        typer.echo(f"Removed {removed} log{'s' if removed != 1 else ''} older than 15 minutes.")
+    else:
+        typer.echo("No logs older than 15 minutes were found.")
 
 
 def main() -> None:
