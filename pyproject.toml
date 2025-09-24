@@ -1,0 +1,21 @@
+[project]
+name = "mcp-terminal-script"
+version = "0.1.0"
+description = "CLI entrypoint for MCP terminal scripts"
+authors = [
+    {name = "Henryk Konsek"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = "^3.11"
+dependencies = [
+    "typer (>=0.19.2,<0.20.0)"
+]
+
+[project.scripts]
+"mcp-terminal-script" = "mcp_terminal_script.cli:main"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
