@@ -1,0 +1,4 @@
+build:
+  agentsmd:
+    from:
+      - file:_agents.md

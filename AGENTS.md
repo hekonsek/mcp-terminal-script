@@ -5,12 +5,12 @@
 - If you can access `~/.cache/script` directory, it means that you can access terminal script session logs even without calling MCP server. Take advanatage of this fact and read these logs when needed.
 - Terminal session script logs are generated using standard Linux `script` command.
 - Terminal session script logs are named with timestamp indicating when session started.
-- You can also rely on Linux file timestamps 
+- You can also rely on Linux file timestamps to see when file ws updated.
 
 ## How to make use of terminal session script logs
 
-- When you are asked about some problem related to cli, check for the latest terminal session script and see if you can see activities related to this topic.
-
+- When you are asked about some problem related to cli, check for recently updated terminal session scripts and see if you can see activities related to this topic.
+- Check for logs modified within past 15 minutes.
 
 ## Examples
 
