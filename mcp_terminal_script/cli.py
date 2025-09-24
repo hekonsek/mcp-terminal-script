@@ -33,7 +33,7 @@ def record() -> None:
     script_path = cache_dir / f"{start_timestamp}.log"
 
     try:
-        result = subprocess.run(["script", "-q", str(script_path)], check=False)
+        result = subprocess.run(["script", "-q", "-f", str(script_path)], check=False)
     except FileNotFoundError:  # script(1) is not available
         typer.secho("The 'script' command is not available. Install util-linux to enable recording.", fg="red", err=True)
         raise typer.Exit(code=127)
