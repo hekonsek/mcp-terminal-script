@@ -42,11 +42,14 @@ def record() -> None:
 
 
 @app.command()
-def clean() -> None:
+def clean(
+    quiet: bool = typer.Option(False, "--quiet", "-q", help="Suppress command output."),
+) -> None:
     """Remove script logs that haven't been touched in the last 15 minutes."""
     cache_dir = Path.home() / ".cache" / "script"
     if not cache_dir.exists():
-        typer.echo("No script logs directory found.")
+        if not quiet:
+            typer.echo("No script logs directory found.")
         return
 
     cutoff = datetime.now() - timedelta(minutes=15)
@@ -59,7 +62,8 @@ def clean() -> None:
         try:
             last_modified = datetime.fromtimestamp(entry.stat().st_mtime)
         except OSError as exc:
-            typer.secho(f"Skipping {entry.name}: {exc}", fg="yellow", err=True)
+            if not quiet:
+                typer.secho(f"Skipping {entry.name}: {exc}", fg="yellow", err=True)
             continue
 
         if last_modified >= cutoff:
@@ -71,7 +75,11 @@ def clean() -> None:
         except FileNotFoundError:
             continue
         except OSError as exc:
-            typer.secho(f"Failed to remove {entry.name}: {exc}", fg="red", err=True)
+            if not quiet:
+                typer.secho(f"Failed to remove {entry.name}: {exc}", fg="red", err=True)
+
+    if quiet:
+        return
 
     if removed:
         typer.echo(f"Removed {removed} log{'s' if removed != 1 else ''} older than 15 minutes.")
