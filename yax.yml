@@ -2,3 +2,4 @@ build:
   agentsmd:
     from:
       - file:_agents.md
+    output: _agents.md
