@@ -3,3 +3,5 @@ build:
     from:
       - file:_agents.md
     output: _agents.md
+    metadata:
+      name: MCP for terminal session script
