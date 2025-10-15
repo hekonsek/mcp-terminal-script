@@ -1,1 +1,1 @@
-# mcp-terminal-script
+# MCP for terminal session scripts
