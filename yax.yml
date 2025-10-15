@@ -4,4 +4,4 @@ build:
       - file:_agents.md
     output: _agents.md
     metadata:
-      name: MCP for terminal session script
+      name: MCP for terminal session scripts
