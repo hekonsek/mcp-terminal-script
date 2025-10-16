@@ -2,7 +2,6 @@
 
 from datetime import datetime, timedelta
 from pathlib import Path
-import subprocess
 
 import anyio
 import typer
@@ -11,6 +10,7 @@ from mcp.server.fastmcp.exceptions import ResourceError
 from mcp.server.fastmcp.resources import DirectoryResource, TextResource
 
 from . import __app_name__, __version__
+from .terminalscript import TerminalScripts
 
 app = typer.Typer(
     help="Interact with the MCP terminal script tooling.",
@@ -28,13 +28,10 @@ def version() -> None:
 def record() -> None:
     """Start a script(1) recording session."""
     cache_dir = Path.home() / ".cache" / "script"
-    cache_dir.mkdir(parents=True, exist_ok=True)
-
-    start_timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    script_path = cache_dir / f"{start_timestamp}.log"
+    scripts = TerminalScripts(cache_dir)
 
     try:
-        result = subprocess.run(["script", "-q", "-f", str(script_path)], check=False)
+        result = scripts.record()
     except FileNotFoundError:  # script(1) is not available
         typer.secho("The 'script' command is not available. Install util-linux to enable recording.", fg="red", err=True)
         raise typer.Exit(code=127)
