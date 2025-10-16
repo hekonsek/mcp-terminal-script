@@ -1,0 +1,7 @@
+build:
+  agentsmd:
+    from:
+      - file:docs/agents.md
+    output: _agents.md
+    metadata:
+      name: MCP for terminal session scripts
