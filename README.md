@@ -21,3 +21,27 @@ In order to run MCP server in Inspector, execute the following command in projec
 ```bash
 npx @modelcontextprotocol/inspector poetry run mcp-terminal-script server
 ```
+
+### Installing from sources
+
+In order to install this MCP server from local sources in Codex execute the following command in project directory:
+
+```bash
+codex mcp add mcp-terminal-session poetry --project `pwd` run mcp-terminal-script server
+```
+
+Or for Copilot:
+
+```json
+"mcp-terminal-session": {
+	"type": "stdio",
+	"command": "poetry",
+	"args": [
+		"--project",
+		"/home/hekonsek/projects/mcp-terminal-script",
+		"run",
+		"mcp-terminal-script",
+		"server"
+	]
+}
+```
