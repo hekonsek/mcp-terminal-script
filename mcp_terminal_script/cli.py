@@ -12,13 +12,10 @@ from mcp.server.fastmcp.resources import DirectoryResource, TextResource
 
 from . import __app_name__, __version__
 
-app = typer.Typer(add_completion=False, help="Interact with the MCP terminal script tooling.")
-
-
-@app.command()
-def greet(name: str = typer.Argument("world", help="Name to greet.")) -> None:
-    """Print a friendly greeting."""
-    typer.echo(f"Hello, {name}!")
+app = typer.Typer(
+    help="Interact with the MCP terminal script tooling.",
+    no_args_is_help=True,
+    )
 
 
 @app.command()
