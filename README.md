@@ -1,6 +1,14 @@
 # MCP for terminal session scripts
 
-This package bundles a small MCP server that exposes terminal session scripts captured with the classic `script(1)` tool. The CLI provides a few handy commands:
+This is MCP server and toolkit that allows coding agents to access your CLI terminal data (including stdin, stdout and stderr). It is useful in making agents aware of commands you are executing and their results.
+
+## How to works
+
+- Under the hood this tool uses standard Unix `script` command to capture your terminal sessions data. 
+- Your terminal session are stored in `~/.cache/script` directory. 
+- Old scripts are removed to keep only recent terminal session data.
+
+## Commands
 
 - `mcp-terminal-script record` starts a new `script` recording and stores it under `~/.cache/script`.
 - `mcp-terminal-script clean` removes recordings older than 15 minutes.
