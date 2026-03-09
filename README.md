@@ -1,6 +1,6 @@
-# Terminal session script utilities
+# Scriptz: record your terminal sessions with script
 
-This project provides a small CLI for working with terminal session recordings created by the standard Unix `script` command.
+This project provides a Node.js + TypeScript CLI for working with terminal session recordings created by the Unix `script` command.
 
 ## How it works
 
@@ -10,14 +10,33 @@ This project provides a small CLI for working with terminal session recordings c
 
 ## Commands
 
-- `mcp-terminal-script record` starts a new recording session.
-- `mcp-terminal-script clean` removes recordings older than 15 minutes.
-- `mcp-terminal-script version` prints the installed package version.
+- `scriptz version` prints the package version.
+- `scriptz record` starts a new recording session.
+- `scriptz clean` removes recordings older than 15 minutes.
+- `scriptz clean --quiet` removes old recordings without output.
 
 ## Local development
 
-Run the test suite with:
+Install dependencies:
 
 ```bash
-poetry run pytest
+npm install
+```
+
+Run tests:
+
+```bash
+npm test
+```
+
+Run the CLI during development:
+
+```bash
+npm run dev -- version
+```
+
+Build distributable files:
+
+```bash
+npm run build
 ```
