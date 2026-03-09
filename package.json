@@ -14,7 +14,9 @@
     "clean": "rm -rf dist",
     "dev": "tsx src/cli/cli.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "release": "npm version minor && git push --follow-tags",
+    "install-latest": "npm install -g https://github.com/hekonsek/spex/archive/refs/tags/v${npm_package_version}.tar.gz"
   },
   "engines": {
     "node": ">=20.0.0"
