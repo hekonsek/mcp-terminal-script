@@ -2,7 +2,6 @@
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 import chalk from "chalk";
 import { Command } from "commander";
 import { ScriptCommandNotFoundError, TerminalScripts, } from "../core/terminal-scripts.js";
@@ -100,14 +99,7 @@ function buildCleanListener(quiet, deps) {
         },
     };
 }
-if (isMainModule()) {
+if (import.meta.main) {
     await runCli();
-}
-function isMainModule() {
-    const entrypoint = process.argv[1];
-    if (!entrypoint) {
-        return false;
-    }
-    return import.meta.url === pathToFileURL(entrypoint).href;
 }
 //# sourceMappingURL=cli.js.map

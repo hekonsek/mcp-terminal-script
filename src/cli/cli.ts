@@ -3,7 +3,6 @@
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import chalk from "chalk";
 import { Command } from "commander";
@@ -156,15 +155,6 @@ function buildCleanListener(
   };
 }
 
-if (isMainModule()) {
+if (import.meta.main) {
   await runCli();
-}
-
-function isMainModule(): boolean {
-  const entrypoint = process.argv[1];
-  if (!entrypoint) {
-    return false;
-  }
-
-  return import.meta.url === pathToFileURL(entrypoint).href;
 }
