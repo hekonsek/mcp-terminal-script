@@ -1,47 +1,23 @@
-# MCP for terminal session scripts
+# Terminal session script utilities
 
-This is MCP server and toolkit that allows coding agents to access your CLI terminal data (including stdin, stdout and stderr). It is useful in making agents aware of commands you are executing and their results.
+This project provides a small CLI for working with terminal session recordings created by the standard Unix `script` command.
 
-## How to works
+## How it works
 
-- Under the hood this tool uses standard Unix `script` command to capture your terminal sessions data. 
-- Your terminal session are stored in `~/.cache/script` directory. 
-- Old scripts are removed to keep only recent terminal session data.
+- Recordings are stored in `~/.cache/script`.
+- `record` starts a new `script` session and writes output to a timestamped `.log` file.
+- `clean` removes recordings older than 15 minutes so only recent session data stays on disk.
 
 ## Commands
 
-- `mcp-terminal-script record` starts a new `script` recording and stores it under `~/.cache/script`.
+- `mcp-terminal-script record` starts a new recording session.
 - `mcp-terminal-script clean` removes recordings older than 15 minutes.
-- `mcp-terminal-script server` launches an stdio-based MCP server (using the official Python SDK) so desktop clients such as Claude can inspect the cached recordings.
+- `mcp-terminal-script version` prints the installed package version.
 
 ## Local development
 
-In order to run MCP server in Inspector, execute the following command in project directory:
+Run the test suite with:
 
 ```bash
-npx @modelcontextprotocol/inspector poetry run mcp-terminal-script server
-```
-
-### Installing from sources
-
-In order to install this MCP server from local sources in Codex execute the following command in project directory:
-
-```bash
-codex mcp add mcp-terminal-session poetry --project `pwd` run mcp-terminal-script server
-```
-
-Or for Copilot:
-
-```json
-"mcp-terminal-session": {
-	"type": "stdio",
-	"command": "poetry",
-	"args": [
-		"--project",
-		"/home/hekonsek/projects/mcp-terminal-script",
-		"run",
-		"mcp-terminal-script",
-		"server"
-	]
-}
+poetry run pytest
 ```

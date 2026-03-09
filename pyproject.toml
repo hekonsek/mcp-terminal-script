@@ -1,7 +1,7 @@
 [project]
 name = "mcp-terminal-script"
 version = "0.1.0"
-description = "CLI entrypoint for MCP terminal scripts"
+description = "CLI utilities for recording terminal sessions"
 authors = [
     {name = "Henryk Konsek"}
 ]
@@ -9,9 +9,7 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = "^3.12"
 dependencies = [
-    "typer (>=0.19.2,<0.20.0)",
-    "mcp (>=1.17.0,<2.0.0)",
-    "anyio (>=4.6.2,<5.0.0)"
+    "typer (>=0.19.2,<0.20.0)"
 ]
 
 [project.scripts]
